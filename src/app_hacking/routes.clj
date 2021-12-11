@@ -12,6 +12,7 @@
 ;; define mapping here
 (defroutes server-routes*
   (GET "/" [] app/show-landing)
+  (GET "/health" [] api/get-health)
   (context "/api" []
            ;; JGET returns json encoding of the response
            (JGET "/time" [] api/get-time))

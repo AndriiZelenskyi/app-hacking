@@ -17,7 +17,7 @@
                  [http-kit "2.5.3"]
 
                  [http-kit/dbcp "0.1.0"] ;; database access
-
+                 [org.clojure/java.jdbc "0.7.12"]
                  [mysql/mysql-connector-java "8.0.25"] ;; mysql jdbc driver
 
                  ;; [org.fressian/fressian "0.6.3"]
