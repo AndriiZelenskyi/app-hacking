@@ -7,12 +7,15 @@
                                               wrap-reload-in-dev JGET JPUT JPOST JDELETE]])
     (:require [app-hacking.handlers.app :as app]
               [app-hacking.handlers.api :as api]
+              [app-hacking.handlers.dao :as dao]
               [compojure.route :as route]))
 
 ;; define mapping here
 (defroutes server-routes*
   (GET "/" [] app/show-landing)
   (GET "/health" [] api/get-health)
+  (GET "/transactions" [] dao/list-transactions)
+  (GET "/accounts" [] dao/list-accounts)
   (context "/api" []
            ;; JGET returns json encoding of the response
            (JGET "/time" [] api/get-time))
