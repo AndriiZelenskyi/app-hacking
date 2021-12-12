@@ -1,7 +1,7 @@
 (ns app-hacking.handlers.api
   (:use [app-hacking.db :as db]
         [clojure.data.json :only [read-str]]
-        [org.httpkit.client :as http]))
+        [org.httpkit.client :only [request]]))
 
 (defn get-time [req]
   {:time (System/currentTimeMillis)
@@ -14,20 +14,20 @@
 
 
 (defn c-test [req]
-  {:response (:uuid (read-str (:body @(http/get "https://httpbin.org/uuid")) :key-fn keyword))})
+  {:response (:uuid (read-str (:body @(org.httpkit.client/get "https://httpbin.org/uuid")) :key-fn keyword))})
 
 (defn monobank [req]
   (let [url "https://api.monobank.ua/personal/client-info"
-        ]
+        headers {"X-Token" "test"}]
     {:response
      (:body
        (read-str
-         (:body @(http/request {:url url, :headers headers :method :get}))))}))
+         (:body @(request {:url url, :headers headers :method :get}))))}))
 
 (defn monobank-accounts [token]
   (let [account-endpoint "https://api.monobank.ua/personal/client-info"
         headers {"X-Token" token}]
-    (->> @(org.httpkit.client/request {
+    (->> @(request {
                                        :url     account-endpoint
                                        :headers headers
                                        :method  :get})

@@ -14,13 +14,13 @@
 (defroutes server-routes*
            (GET "/" [] app/show-landing)
            (GET "/health" [] api/get-health)
-  (GET "/transactions" [] dao/list-transactions)
-  (GET "/accounts" [] dao/list-accounts)
   (context "/api" []
              ;; JGET returns json encoding of the response
              (JGET "/time" [] api/get-time)
-             (JGET "/test" [] api/c-test)
              (JGET "/mono" [] api/monobank)
+             (JGET "/transactions" [] dao/list-transactions)
+             (JGET "/accounts" [] dao/list-accounts)
+             (JGET "/users" [] dao/list-users)
              )
            ;; static files under ./public folder, prefix /static
            ;; like /static/css/style.css

@@ -13,6 +13,5 @@
 (defn list-accounts [req]
   (db/list-table :mono_account))
 
-; Populate DB
-(save-transaction {:amount 100 :comment "ROFL" :mcc 12})
-(save-account {:account-id 12 :mono-id 120})
+(defn list-users [req]
+  (db/list-table :users))
